@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react"
+import User from "./children/User";
 
 export default function Todo(props : {session : string}){
 
@@ -20,6 +21,7 @@ export default function Todo(props : {session : string}){
     return (
         <>
             유저 정보 리스트임
+            <User />
             <br />
             그냥 할 일 리스트임
             <br />
