@@ -63,6 +63,9 @@ export async function GET(req : NextRequest){
                     deletedAt : null,
                     userId : session.user?.id
                 },
+                orderBy : {
+                    createdAt : "desc"
+                },
                 take : pageSize,
                 skip : (page - 1) * pageSize
             }),
