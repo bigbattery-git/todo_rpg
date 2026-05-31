@@ -1,17 +1,9 @@
-import { GETTodoResponse, TodoData } from "@/app/(types)/todo/todo";
+import { GETTodoResponse, POSTTodoResponse, TodoData } from "@/app/(types)/todo/todo";
 import { BADJSONDATA, SERVERERROR, TODOTYPE } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
 import { TodoStatus, TodoType} from "@/src/generated/enums";
 import { NextRequest, NextResponse } from "next/server";
-
-
-
-interface POSTTodoResponse {
-    success : boolean,
-    message : string | null,
-    data ?: TodoData
-}
 
 export async function GET(req : NextRequest){
     const session = await getSession();

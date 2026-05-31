@@ -16,3 +16,9 @@ export interface TodoData {
     todoStatus: TodoStatus,
     createdAt: Date
 }
+
+export interface POSTTodoResponse {
+    success : boolean,
+    message : string | null,
+    data ?: TodoData
+}
