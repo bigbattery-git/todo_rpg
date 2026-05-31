@@ -23,7 +23,14 @@ interface GETItemsResponse {
 interface POSTItemsResponse {
     success : boolean,
     message : null | string,
-    data ?: null
+    data ?: {
+        id : number,
+        createdAt : Date,
+        item : {
+            name : string,
+            content : string
+        }
+    } | null
 }
 
 export async function GET(req : NextRequest){
@@ -94,3 +101,61 @@ export async function GET(req : NextRequest){
     }
 }
 
+interface POSTItemsRequest{
+    // TODO :  나중에 아이템 여러 개 추가되면 그 때 사용
+}
+
+export async function POST(req : NextRequest){
+    const session = await getSession();
+    const response : POSTItemsResponse = {
+        success : false,
+        message : null
+    }
+
+    if(!session || !session.isLoggedin || !session.user?.id){
+        response.message = "로그인이 필요합니다";
+        return NextResponse.json(response, {status : 401});
+    }
+
+    try{
+        const userId = session.user.id;
+
+        const result = await prisma.$transaction(async(prisma) => {
+            const createItemData = await prisma.item.create({
+                data : {
+                    itemId : 1,
+                    userId : userId
+                }
+            })
+
+            const createdItemData = await prisma.item.findFirst({
+                select : {
+                    id : true,
+                    createdAt : true,
+                    item : {
+                        select : {
+                            name : true,
+                            content : true
+                        }
+                    }
+                }, where : {
+                    id : createItemData.id
+                }
+            })
+
+            return {
+                createdItemData
+            }
+        });
+
+        response.success = true;
+        response.message = "아이템 추가를 완료했습니다.";
+        response.data = result.createdItemData
+
+        return NextResponse.json(response, {status : 200});
+    } catch (e) {
+        console.error(e);
+        response.message = SERVERERROR;
+        return NextResponse.json(response, {status : 500});
+    }
+}
