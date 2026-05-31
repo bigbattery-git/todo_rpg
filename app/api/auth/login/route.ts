@@ -56,6 +56,7 @@ export async function POST(req : NextRequest){
         session.user = {
             id : userData.id
         }
+        session.isLoggedin = true;
         await session.save();
 
         response.success = true;
