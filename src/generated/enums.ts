@@ -20,6 +20,14 @@ export const TodoType = {
 export type TodoType = (typeof TodoType)[keyof typeof TodoType]
 
 
+export const TodoStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED'
+} as const
+
+export type TodoStatus = (typeof TodoStatus)[keyof typeof TodoStatus]
+
+
 export const FriendState = {
   INVITED: 'INVITED',
   FRIEND: 'FRIEND',

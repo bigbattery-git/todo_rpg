@@ -1075,6 +1075,7 @@ export const TodoScalarFieldEnum = {
   content: 'content',
   userId: 'userId',
   todoType: 'todoType',
+  todoStatus: 'todoStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -1263,6 +1264,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'TodoType'
  */
 export type EnumTodoTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TodoType'>
+    
+
+
+/**
+ * Reference to a field of type 'TodoStatus'
+ */
+export type EnumTodoStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TodoStatus'>
     
 
 

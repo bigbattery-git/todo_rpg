@@ -100,6 +100,7 @@ export const TodoScalarFieldEnum = {
   content: 'content',
   userId: 'userId',
   todoType: 'todoType',
+  todoStatus: 'todoStatus',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'

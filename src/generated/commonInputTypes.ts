@@ -106,6 +106,13 @@ export type EnumTodoTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumTodoTypeFilter<$PrismaModel> | $Enums.TodoType
 }
 
+export type EnumTodoStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.TodoStatus | Prisma.EnumTodoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TodoStatus[]
+  notIn?: $Enums.TodoStatus[]
+  not?: Prisma.NestedEnumTodoStatusFilter<$PrismaModel> | $Enums.TodoStatus
+}
+
 export type DateTimeNullableFilter<$PrismaModel = never> = {
   equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
   in?: Date[] | string[] | null
@@ -130,6 +137,16 @@ export type EnumTodoTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTodoTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTodoTypeFilter<$PrismaModel>
+}
+
+export type EnumTodoStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TodoStatus | Prisma.EnumTodoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TodoStatus[]
+  notIn?: $Enums.TodoStatus[]
+  not?: Prisma.NestedEnumTodoStatusWithAggregatesFilter<$PrismaModel> | $Enums.TodoStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTodoStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTodoStatusFilter<$PrismaModel>
 }
 
 export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -316,6 +333,13 @@ export type NestedEnumTodoTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumTodoTypeFilter<$PrismaModel> | $Enums.TodoType
 }
 
+export type NestedEnumTodoStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.TodoStatus | Prisma.EnumTodoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TodoStatus[]
+  notIn?: $Enums.TodoStatus[]
+  not?: Prisma.NestedEnumTodoStatusFilter<$PrismaModel> | $Enums.TodoStatus
+}
+
 export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   equals?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel> | null
   in?: Date[] | string[] | null
@@ -335,6 +359,16 @@ export type NestedEnumTodoTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTodoTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTodoTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumTodoStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TodoStatus | Prisma.EnumTodoStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TodoStatus[]
+  notIn?: $Enums.TodoStatus[]
+  not?: Prisma.NestedEnumTodoStatusWithAggregatesFilter<$PrismaModel> | $Enums.TodoStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTodoStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTodoStatusFilter<$PrismaModel>
 }
 
 export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
