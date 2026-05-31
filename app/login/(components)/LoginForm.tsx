@@ -56,12 +56,12 @@ export default function LoginForm(props : {session : string}){
             />
             
             <button
-            className="border max-w-20"
+            className="border max-w-20 my-5"
             onClick={() => {login()}} 
             >로그인</button>
             <button
             className="border max-w-20"
-            onClick={() => {login()}} 
+            onClick={() => {route.push('/regist')}} 
             >회원가입</button>
         </>
     )
