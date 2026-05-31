@@ -6,3 +6,11 @@ export interface GETTodoResponse {
         lastPage : number
     }
 }
+export interface TodoData {
+    id: number,
+    title: string,
+    content: string,
+    todoType: TodoType,
+    todoStatus: TodoStatus,
+    createdAt: Date
+}
