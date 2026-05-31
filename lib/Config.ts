@@ -8,5 +8,5 @@ export const TODOTYPE : string[] = ["WORK", "HOBBY", "HEALTH", "SELP_MANAGEMENT"
 export const getNextLevelUpExp = (currentExt : number) : number => {
     const currentLevel : number = Math.floor(currentExt / 1000);
 
-    return currentLevel * 1000;
+    return (currentLevel * 1000) + 1000;
 }
