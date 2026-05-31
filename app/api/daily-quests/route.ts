@@ -1,3 +1,4 @@
+import { GETDailyQuestResponse, POSTDailyQuestRequest, POSTDailyQuestResponse } from "@/app/(types)/daily-quest/daily-quest";
 import { BADJSONDATA, SERVERERROR, TODOTYPE } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
@@ -5,37 +6,7 @@ import { DailyQuest } from "@/src/generated/browser";
 import { DailyQuestStatus, TodoStatus, TodoType} from "@/src/generated/enums";
 import { NextRequest, NextResponse } from "next/server";
 
-interface DailyQuestData {
-    id: number;
-    title: string;
-    content: string;
-    todoType: TodoType;
-    createdAt: Date;
-    dailyQuestPregresses: {
-        status: DailyQuestStatus;
-    }[];
-};
 
-interface GETDailyQuestResponse {
-    success : boolean,
-    message : string | null,
-    data ?: {
-        dailyQuestData : DailyQuestData[],
-        lastPage : number
-    }
-}
-
-interface POSTTodoResponse {
-    success : boolean,
-    message : string | null,
-    data ?: DailyQuest
-}
-
-interface POSTDailyQuestRequest { 
-    title : string,
-    content : string,
-    todoType : TodoType
-}
 
 export async function GET(req : NextRequest){
     const session = await getSession();
@@ -118,7 +89,7 @@ export async function POST(req : NextRequest){
     let requestData : POSTDailyQuestRequest;
 
     const todoType : string[] = TODOTYPE;
-    const response : POSTTodoResponse = {
+    const response : POSTDailyQuestResponse = {
         success : false,
         message : null
     }
