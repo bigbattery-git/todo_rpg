@@ -33,7 +33,6 @@ export type UserAvgAggregateOutputType = {
   sta: number | null
   cha: number | null
   intel: number | null
-  exp: number | null
 }
 
 export type UserSumAggregateOutputType = {
@@ -43,7 +42,6 @@ export type UserSumAggregateOutputType = {
   sta: number | null
   cha: number | null
   intel: number | null
-  exp: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -56,7 +54,6 @@ export type UserMinAggregateOutputType = {
   sta: number | null
   cha: number | null
   intel: number | null
-  exp: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,7 +68,6 @@ export type UserMaxAggregateOutputType = {
   sta: number | null
   cha: number | null
   intel: number | null
-  exp: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -86,7 +82,6 @@ export type UserCountAggregateOutputType = {
   sta: number
   cha: number
   intel: number
-  exp: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -100,7 +95,6 @@ export type UserAvgAggregateInputType = {
   sta?: true
   cha?: true
   intel?: true
-  exp?: true
 }
 
 export type UserSumAggregateInputType = {
@@ -110,7 +104,6 @@ export type UserSumAggregateInputType = {
   sta?: true
   cha?: true
   intel?: true
-  exp?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -123,7 +116,6 @@ export type UserMinAggregateInputType = {
   sta?: true
   cha?: true
   intel?: true
-  exp?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -138,7 +130,6 @@ export type UserMaxAggregateInputType = {
   sta?: true
   cha?: true
   intel?: true
-  exp?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -153,7 +144,6 @@ export type UserCountAggregateInputType = {
   sta?: true
   cha?: true
   intel?: true
-  exp?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -255,7 +245,6 @@ export type UserGroupByOutputType = {
   sta: number
   cha: number
   intel: number
-  exp: number
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -293,9 +282,9 @@ export type UserWhereInput = {
   sta?: Prisma.IntFilter<"User"> | number
   cha?: Prisma.IntFilter<"User"> | number
   intel?: Prisma.IntFilter<"User"> | number
-  exp?: Prisma.IntFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  userExpLogs?: Prisma.UserExpLogListRelationFilter
   todos?: Prisma.TodoListRelationFilter
   dailyQuests?: Prisma.DailyQuestListRelationFilter
   friendMes?: Prisma.FriendListRelationFilter
@@ -314,9 +303,9 @@ export type UserOrderByWithRelationInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  userExpLogs?: Prisma.UserExpLogOrderByRelationAggregateInput
   todos?: Prisma.TodoOrderByRelationAggregateInput
   dailyQuests?: Prisma.DailyQuestOrderByRelationAggregateInput
   friendMes?: Prisma.FriendOrderByRelationAggregateInput
@@ -339,9 +328,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sta?: Prisma.IntFilter<"User"> | number
   cha?: Prisma.IntFilter<"User"> | number
   intel?: Prisma.IntFilter<"User"> | number
-  exp?: Prisma.IntFilter<"User"> | number
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  userExpLogs?: Prisma.UserExpLogListRelationFilter
   todos?: Prisma.TodoListRelationFilter
   dailyQuests?: Prisma.DailyQuestListRelationFilter
   friendMes?: Prisma.FriendListRelationFilter
@@ -360,7 +349,6 @@ export type UserOrderByWithAggregationInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -383,7 +371,6 @@ export type UserScalarWhereWithAggregatesInput = {
   sta?: Prisma.IntWithAggregatesFilter<"User"> | number
   cha?: Prisma.IntWithAggregatesFilter<"User"> | number
   intel?: Prisma.IntWithAggregatesFilter<"User"> | number
-  exp?: Prisma.IntWithAggregatesFilter<"User"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -397,9 +384,9 @@ export type UserCreateInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
@@ -418,9 +405,9 @@ export type UserUncheckedCreateInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
@@ -438,9 +425,9 @@ export type UserUpdateInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
@@ -459,9 +446,9 @@ export type UserUncheckedUpdateInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
@@ -480,7 +467,6 @@ export type UserCreateManyInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -494,7 +480,6 @@ export type UserUpdateManyMutationInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -509,7 +494,6 @@ export type UserUncheckedUpdateManyInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -530,7 +514,6 @@ export type UserCountOrderByAggregateInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -542,7 +525,6 @@ export type UserAvgOrderByAggregateInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -555,7 +537,6 @@ export type UserMaxOrderByAggregateInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -570,7 +551,6 @@ export type UserMinOrderByAggregateInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -582,7 +562,6 @@ export type UserSumOrderByAggregateInput = {
   sta?: Prisma.SortOrder
   cha?: Prisma.SortOrder
   intel?: Prisma.SortOrder
-  exp?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -604,6 +583,20 @@ export type IntFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutUserExpLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserExpLogsInput, Prisma.UserUncheckedCreateWithoutUserExpLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserExpLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUserExpLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUserExpLogsInput, Prisma.UserUncheckedCreateWithoutUserExpLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUserExpLogsInput
+  upsert?: Prisma.UserUpsertWithoutUserExpLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUserExpLogsInput, Prisma.UserUpdateWithoutUserExpLogsInput>, Prisma.UserUncheckedUpdateWithoutUserExpLogsInput>
 }
 
 export type UserCreateNestedOneWithoutTodosInput = {
@@ -690,6 +683,100 @@ export type UserUpdateOneRequiredWithoutItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutItemsInput, Prisma.UserUpdateWithoutItemsInput>, Prisma.UserUncheckedUpdateWithoutItemsInput>
 }
 
+export type UserCreateWithoutUserExpLogsInput = {
+  name: string
+  email: string
+  password: string
+  str?: number
+  dex?: number
+  sta?: number
+  cha?: number
+  intel?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  todos?: Prisma.TodoCreateNestedManyWithoutUserInput
+  dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
+  friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
+  friendFriends?: Prisma.FriendCreateNestedManyWithoutFriendInput
+  items?: Prisma.ItemCreateNestedManyWithoutUserInput
+  RewardClaimLogs?: Prisma.RewardClaimLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutUserExpLogsInput = {
+  id?: number
+  name: string
+  email: string
+  password: string
+  str?: number
+  dex?: number
+  sta?: number
+  cha?: number
+  intel?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
+  dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
+  friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
+  friendFriends?: Prisma.FriendUncheckedCreateNestedManyWithoutFriendInput
+  items?: Prisma.ItemUncheckedCreateNestedManyWithoutUserInput
+  RewardClaimLogs?: Prisma.RewardClaimLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutUserExpLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserExpLogsInput, Prisma.UserUncheckedCreateWithoutUserExpLogsInput>
+}
+
+export type UserUpsertWithoutUserExpLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUserExpLogsInput, Prisma.UserUncheckedUpdateWithoutUserExpLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUserExpLogsInput, Prisma.UserUncheckedCreateWithoutUserExpLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUserExpLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUserExpLogsInput, Prisma.UserUncheckedUpdateWithoutUserExpLogsInput>
+}
+
+export type UserUpdateWithoutUserExpLogsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  str?: Prisma.IntFieldUpdateOperationsInput | number
+  dex?: Prisma.IntFieldUpdateOperationsInput | number
+  sta?: Prisma.IntFieldUpdateOperationsInput | number
+  cha?: Prisma.IntFieldUpdateOperationsInput | number
+  intel?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
+  dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
+  friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
+  friendFriends?: Prisma.FriendUpdateManyWithoutFriendNestedInput
+  items?: Prisma.ItemUpdateManyWithoutUserNestedInput
+  RewardClaimLogs?: Prisma.RewardClaimLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUserExpLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  str?: Prisma.IntFieldUpdateOperationsInput | number
+  dex?: Prisma.IntFieldUpdateOperationsInput | number
+  sta?: Prisma.IntFieldUpdateOperationsInput | number
+  cha?: Prisma.IntFieldUpdateOperationsInput | number
+  intel?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
+  dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
+  friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
+  friendFriends?: Prisma.FriendUncheckedUpdateManyWithoutFriendNestedInput
+  items?: Prisma.ItemUncheckedUpdateManyWithoutUserNestedInput
+  RewardClaimLogs?: Prisma.RewardClaimLogUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutTodosInput = {
   name: string
   email: string
@@ -699,9 +786,9 @@ export type UserCreateWithoutTodosInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
   friendFriends?: Prisma.FriendCreateNestedManyWithoutFriendInput
@@ -719,9 +806,9 @@ export type UserUncheckedCreateWithoutTodosInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
   friendFriends?: Prisma.FriendUncheckedCreateNestedManyWithoutFriendInput
@@ -754,9 +841,9 @@ export type UserUpdateWithoutTodosInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
   friendFriends?: Prisma.FriendUpdateManyWithoutFriendNestedInput
@@ -774,9 +861,9 @@ export type UserUncheckedUpdateWithoutTodosInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
   friendFriends?: Prisma.FriendUncheckedUpdateManyWithoutFriendNestedInput
@@ -793,9 +880,9 @@ export type UserCreateWithoutDailyQuestsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
   friendFriends?: Prisma.FriendCreateNestedManyWithoutFriendInput
@@ -813,9 +900,9 @@ export type UserUncheckedCreateWithoutDailyQuestsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
   friendFriends?: Prisma.FriendUncheckedCreateNestedManyWithoutFriendInput
@@ -848,9 +935,9 @@ export type UserUpdateWithoutDailyQuestsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
   friendFriends?: Prisma.FriendUpdateManyWithoutFriendNestedInput
@@ -868,9 +955,9 @@ export type UserUncheckedUpdateWithoutDailyQuestsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
   friendFriends?: Prisma.FriendUncheckedUpdateManyWithoutFriendNestedInput
@@ -887,9 +974,9 @@ export type UserCreateWithoutFriendMesInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
   friendFriends?: Prisma.FriendCreateNestedManyWithoutFriendInput
@@ -907,9 +994,9 @@ export type UserUncheckedCreateWithoutFriendMesInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
   friendFriends?: Prisma.FriendUncheckedCreateNestedManyWithoutFriendInput
@@ -931,9 +1018,9 @@ export type UserCreateWithoutFriendFriendsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
@@ -951,9 +1038,9 @@ export type UserUncheckedCreateWithoutFriendFriendsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
@@ -986,9 +1073,9 @@ export type UserUpdateWithoutFriendMesInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
   friendFriends?: Prisma.FriendUpdateManyWithoutFriendNestedInput
@@ -1006,9 +1093,9 @@ export type UserUncheckedUpdateWithoutFriendMesInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
   friendFriends?: Prisma.FriendUncheckedUpdateManyWithoutFriendNestedInput
@@ -1036,9 +1123,9 @@ export type UserUpdateWithoutFriendFriendsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
@@ -1056,9 +1143,9 @@ export type UserUncheckedUpdateWithoutFriendFriendsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
@@ -1075,9 +1162,9 @@ export type UserCreateWithoutRewardClaimLogsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
@@ -1095,9 +1182,9 @@ export type UserUncheckedCreateWithoutRewardClaimLogsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
@@ -1130,9 +1217,9 @@ export type UserUpdateWithoutRewardClaimLogsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
@@ -1150,9 +1237,9 @@ export type UserUncheckedUpdateWithoutRewardClaimLogsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
@@ -1169,9 +1256,9 @@ export type UserCreateWithoutItemsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendCreateNestedManyWithoutUserInput
@@ -1189,9 +1276,9 @@ export type UserUncheckedCreateWithoutItemsInput = {
   sta?: number
   cha?: number
   intel?: number
-  exp?: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedCreateNestedManyWithoutUserInput
   todos?: Prisma.TodoUncheckedCreateNestedManyWithoutUserInput
   dailyQuests?: Prisma.DailyQuestUncheckedCreateNestedManyWithoutUserInput
   friendMes?: Prisma.FriendUncheckedCreateNestedManyWithoutUserInput
@@ -1224,9 +1311,9 @@ export type UserUpdateWithoutItemsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUpdateManyWithoutUserNestedInput
@@ -1244,9 +1331,9 @@ export type UserUncheckedUpdateWithoutItemsInput = {
   sta?: Prisma.IntFieldUpdateOperationsInput | number
   cha?: Prisma.IntFieldUpdateOperationsInput | number
   intel?: Prisma.IntFieldUpdateOperationsInput | number
-  exp?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userExpLogs?: Prisma.UserExpLogUncheckedUpdateManyWithoutUserNestedInput
   todos?: Prisma.TodoUncheckedUpdateManyWithoutUserNestedInput
   dailyQuests?: Prisma.DailyQuestUncheckedUpdateManyWithoutUserNestedInput
   friendMes?: Prisma.FriendUncheckedUpdateManyWithoutUserNestedInput
@@ -1260,6 +1347,7 @@ export type UserUncheckedUpdateWithoutItemsInput = {
  */
 
 export type UserCountOutputType = {
+  userExpLogs: number
   todos: number
   dailyQuests: number
   friendMes: number
@@ -1269,6 +1357,7 @@ export type UserCountOutputType = {
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  userExpLogs?: boolean | UserCountOutputTypeCountUserExpLogsArgs
   todos?: boolean | UserCountOutputTypeCountTodosArgs
   dailyQuests?: boolean | UserCountOutputTypeCountDailyQuestsArgs
   friendMes?: boolean | UserCountOutputTypeCountFriendMesArgs
@@ -1285,6 +1374,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUserExpLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserExpLogWhereInput
 }
 
 /**
@@ -1340,9 +1436,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sta?: boolean
   cha?: boolean
   intel?: boolean
-  exp?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  userExpLogs?: boolean | Prisma.User$userExpLogsArgs<ExtArgs>
   todos?: boolean | Prisma.User$todosArgs<ExtArgs>
   dailyQuests?: boolean | Prisma.User$dailyQuestsArgs<ExtArgs>
   friendMes?: boolean | Prisma.User$friendMesArgs<ExtArgs>
@@ -1364,13 +1460,13 @@ export type UserSelectScalar = {
   sta?: boolean
   cha?: boolean
   intel?: boolean
-  exp?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "str" | "dex" | "sta" | "cha" | "intel" | "exp" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "str" | "dex" | "sta" | "cha" | "intel" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  userExpLogs?: boolean | Prisma.User$userExpLogsArgs<ExtArgs>
   todos?: boolean | Prisma.User$todosArgs<ExtArgs>
   dailyQuests?: boolean | Prisma.User$dailyQuestsArgs<ExtArgs>
   friendMes?: boolean | Prisma.User$friendMesArgs<ExtArgs>
@@ -1383,6 +1479,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    userExpLogs: Prisma.$UserExpLogPayload<ExtArgs>[]
     todos: Prisma.$TodoPayload<ExtArgs>[]
     dailyQuests: Prisma.$DailyQuestPayload<ExtArgs>[]
     friendMes: Prisma.$FriendPayload<ExtArgs>[]
@@ -1400,7 +1497,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sta: number
     cha: number
     intel: number
-    exp: number
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1743,6 +1839,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  userExpLogs<T extends Prisma.User$userExpLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$userExpLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserExpLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   todos<T extends Prisma.User$todosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$todosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TodoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dailyQuests<T extends Prisma.User$dailyQuestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyQuestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DailyQuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   friendMes<T extends Prisma.User$friendMesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendMesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1787,7 +1884,6 @@ export interface UserFieldRefs {
   readonly sta: Prisma.FieldRef<"User", 'Int'>
   readonly cha: Prisma.FieldRef<"User", 'Int'>
   readonly intel: Prisma.FieldRef<"User", 'Int'>
-  readonly exp: Prisma.FieldRef<"User", 'Int'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -2130,6 +2226,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.userExpLogs
+ */
+export type User$userExpLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserExpLog
+   */
+  select?: Prisma.UserExpLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserExpLog
+   */
+  omit?: Prisma.UserExpLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserExpLogInclude<ExtArgs> | null
+  where?: Prisma.UserExpLogWhereInput
+  orderBy?: Prisma.UserExpLogOrderByWithRelationInput | Prisma.UserExpLogOrderByWithRelationInput[]
+  cursor?: Prisma.UserExpLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserExpLogScalarFieldEnum | Prisma.UserExpLogScalarFieldEnum[]
 }
 
 /**

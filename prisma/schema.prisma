@@ -63,10 +63,10 @@ model User{
   sta Int @default(1) // 체력, 건강 관련
   cha Int @default(1) // 매력, 자기관리 관련
   intel Int @default(1) // 지능, 배움과 사고 관련
-  exp Int @default(0)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  userExpLogs UserExpLog[]
   todos Todo[]
   dailyQuests DailyQuest[] 
   friendMes Friend[] @relation("friendUser")
@@ -75,6 +75,14 @@ model User{
   RewardClaimLogs RewardClaimLog[]
 
   @@map("users")
+}
+
+model UserExpLog{
+  id Int @id @default(autoincrement())
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+  exp Int
+  @@map("user_exp_logs")
 }
 
 // 단순 할 일 목록

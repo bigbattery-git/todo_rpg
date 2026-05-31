@@ -391,6 +391,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  UserExpLog: 'UserExpLog',
   Todo: 'Todo',
   DailyQuest: 'DailyQuest',
   DailyQuestProgress: 'DailyQuestProgress',
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "todo" | "dailyQuest" | "dailyQuestProgress" | "friend" | "reward" | "rewardItem" | "rewardClaimLog" | "item"
+    modelProps: "user" | "userExpLog" | "todo" | "dailyQuest" | "dailyQuestProgress" | "friend" | "reward" | "rewardItem" | "rewardClaimLog" | "item"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -481,6 +482,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserExpLog: {
+      payload: Prisma.$UserExpLogPayload<ExtArgs>
+      fields: Prisma.UserExpLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserExpLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserExpLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>
+        }
+        findFirst: {
+          args: Prisma.UserExpLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserExpLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>
+        }
+        findMany: {
+          args: Prisma.UserExpLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>[]
+        }
+        create: {
+          args: Prisma.UserExpLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>
+        }
+        createMany: {
+          args: Prisma.UserExpLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.UserExpLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>
+        }
+        update: {
+          args: Prisma.UserExpLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserExpLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserExpLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.UserExpLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserExpLogPayload>
+        }
+        aggregate: {
+          args: Prisma.UserExpLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserExpLog>
+        }
+        groupBy: {
+          args: Prisma.UserExpLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserExpLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserExpLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserExpLogCountAggregateOutputType> | number
         }
       }
     }
@@ -1061,12 +1128,20 @@ export const UserScalarFieldEnum = {
   sta: 'sta',
   cha: 'cha',
   intel: 'intel',
-  exp: 'exp',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserExpLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  exp: 'exp'
+} as const
+
+export type UserExpLogScalarFieldEnum = (typeof UserExpLogScalarFieldEnum)[keyof typeof UserExpLogScalarFieldEnum]
 
 
 export const TodoScalarFieldEnum = {
@@ -1382,6 +1457,7 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  userExpLog?: Prisma.UserExpLogOmit
   todo?: Prisma.TodoOmit
   dailyQuest?: Prisma.DailyQuestOmit
   dailyQuestProgress?: Prisma.DailyQuestProgressOmit
