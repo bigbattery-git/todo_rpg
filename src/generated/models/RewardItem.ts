@@ -195,7 +195,7 @@ export type RewardItemGroupByOutputType = {
   id: number
   name: string
   content: string
-  memo: string
+  memo: string | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
@@ -228,7 +228,7 @@ export type RewardItemWhereInput = {
   id?: Prisma.IntFilter<"RewardItem"> | number
   name?: Prisma.StringFilter<"RewardItem"> | string
   content?: Prisma.StringFilter<"RewardItem"> | string
-  memo?: Prisma.StringFilter<"RewardItem"> | string
+  memo?: Prisma.StringNullableFilter<"RewardItem"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RewardItem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RewardItem"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"RewardItem"> | Date | string | null
@@ -240,7 +240,7 @@ export type RewardItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  memo?: Prisma.SortOrder
+  memo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -256,7 +256,7 @@ export type RewardItemWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RewardItemWhereInput | Prisma.RewardItemWhereInput[]
   name?: Prisma.StringFilter<"RewardItem"> | string
   content?: Prisma.StringFilter<"RewardItem"> | string
-  memo?: Prisma.StringFilter<"RewardItem"> | string
+  memo?: Prisma.StringNullableFilter<"RewardItem"> | string | null
   createdAt?: Prisma.DateTimeFilter<"RewardItem"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RewardItem"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"RewardItem"> | Date | string | null
@@ -268,7 +268,7 @@ export type RewardItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  memo?: Prisma.SortOrder
+  memo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -286,7 +286,7 @@ export type RewardItemScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"RewardItem"> | number
   name?: Prisma.StringWithAggregatesFilter<"RewardItem"> | string
   content?: Prisma.StringWithAggregatesFilter<"RewardItem"> | string
-  memo?: Prisma.StringWithAggregatesFilter<"RewardItem"> | string
+  memo?: Prisma.StringNullableWithAggregatesFilter<"RewardItem"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RewardItem"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RewardItem"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"RewardItem"> | Date | string | null
@@ -295,7 +295,7 @@ export type RewardItemScalarWhereWithAggregatesInput = {
 export type RewardItemCreateInput = {
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -307,7 +307,7 @@ export type RewardItemUncheckedCreateInput = {
   id?: number
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -318,7 +318,7 @@ export type RewardItemUncheckedCreateInput = {
 export type RewardItemUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -330,7 +330,7 @@ export type RewardItemUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -342,7 +342,7 @@ export type RewardItemCreateManyInput = {
   id?: number
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -351,7 +351,7 @@ export type RewardItemCreateManyInput = {
 export type RewardItemUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -361,7 +361,7 @@ export type RewardItemUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -447,7 +447,7 @@ export type RewardItemUpdateOneRequiredWithoutItemsNestedInput = {
 export type RewardItemCreateWithoutRewardClaimLogsInput = {
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -458,7 +458,7 @@ export type RewardItemUncheckedCreateWithoutRewardClaimLogsInput = {
   id?: number
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -484,7 +484,7 @@ export type RewardItemUpdateToOneWithWhereWithoutRewardClaimLogsInput = {
 export type RewardItemUpdateWithoutRewardClaimLogsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -495,7 +495,7 @@ export type RewardItemUncheckedUpdateWithoutRewardClaimLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -505,7 +505,7 @@ export type RewardItemUncheckedUpdateWithoutRewardClaimLogsInput = {
 export type RewardItemCreateWithoutItemsInput = {
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -516,7 +516,7 @@ export type RewardItemUncheckedCreateWithoutItemsInput = {
   id?: number
   name: string
   content: string
-  memo: string
+  memo?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
@@ -542,7 +542,7 @@ export type RewardItemUpdateToOneWithWhereWithoutItemsInput = {
 export type RewardItemUpdateWithoutItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -553,7 +553,7 @@ export type RewardItemUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  memo?: Prisma.StringFieldUpdateOperationsInput | string
+  memo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -642,7 +642,7 @@ export type $RewardItemPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: number
     name: string
     content: string
-    memo: string
+    memo: string | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
