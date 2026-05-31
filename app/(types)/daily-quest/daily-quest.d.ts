@@ -1,3 +1,5 @@
+import { DailyQuestStatus } from "@/src/generated/enums";
+
 export interface DailyQuestData {
     id: number;
     title: string;

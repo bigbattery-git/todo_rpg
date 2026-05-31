@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react"
 import User from "./children/User";
 import TodoList from "./children/TodoList";
+import DailyQuest from "./children/DailyQuest";
 
 export default function Todo(props : {session : string}){
 
@@ -28,6 +29,7 @@ export default function Todo(props : {session : string}){
             <TodoList/>
             <br />
             일일 퀘스트 리스트임
+            <DailyQuest/>
             <br />
         </>
     )
