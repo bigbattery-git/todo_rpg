@@ -1,3 +1,4 @@
+import { GETTodoResponse } from "@/app/(types)/todo/todo";
 import { BADJSONDATA, SERVERERROR, TODOTYPE } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
@@ -11,15 +12,6 @@ interface TodoData {
     todoType: TodoType,
     todoStatus: TodoStatus,
     createdAt: Date
-}
-
-interface GETTodoResponse {
-    success : boolean,
-    message : string | null,
-    data ?: {
-        todoData : TodoData[],
-        lastPage : number
-    }
 }
 
 interface POSTTodoResponse {
