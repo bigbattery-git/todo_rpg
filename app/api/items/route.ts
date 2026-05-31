@@ -1,37 +1,11 @@
+import { GETItemsResponse, POSTItemsResponse } from "@/app/(types)/item/item";
 import { SERVERERROR } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
 import { Item } from "@/src/generated/browser";
 import { NextRequest, NextResponse } from "next/server";
 
-interface GETItemsResponse {
-    success : boolean,
-    message : null | string,
-    datas ?: {
-        items : {
-            id : number,
-            createdAt : Date,
-            item : {
-                name : string,
-                content : string
-            }
-        }[], 
-        lastPage : number
-    }
-}
 
-interface POSTItemsResponse {
-    success : boolean,
-    message : null | string,
-    data ?: {
-        id : number,
-        createdAt : Date,
-        item : {
-            name : string,
-            content : string
-        }
-    } | null
-}
 
 export async function GET(req : NextRequest){
     const requestData = req.nextUrl.searchParams;
@@ -99,10 +73,6 @@ export async function GET(req : NextRequest){
         response.message = SERVERERROR
         return NextResponse.json(response, {status : 500});
     }
-}
-
-interface POSTItemsRequest{
-    // TODO :  나중에 아이템 여러 개 추가되면 그 때 사용
 }
 
 export async function POST(req : NextRequest){
