@@ -65,7 +65,7 @@ export async function GET(req : NextRequest){
             lastPage : Math.ceil(totalCount/pageSize)
         }
 
-        response.success = false;
+        response.success = true;
         response.message = "TODO 목록 조회를 완료하였습니다";
 
         return NextResponse.json(response, {status : 200});
