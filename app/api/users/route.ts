@@ -1,27 +1,8 @@
+import { GETUsersResponse } from "@/app/(types)/user/user";
 import { SERVERERROR } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
 import { NextResponse } from "next/server";
-
-interface GETUsersResponse {
-    success : boolean,
-    message : null | string,
-    data ?: {
-        user : {
-            name: string;
-            id: number;
-            email: string;
-            password: string;
-            str: number;
-            dex: number;
-            sta: number;
-            cha: number;
-            intel: number;
-            createdAt: Date;
-            updatedAt: Date;
-        } | null , totalExp : number
-    }
-}
 
 export async function GET(){
     const session = await getSession();
