@@ -6,10 +6,222 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../src/generated"
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+  // - User
+  // - Character
+  // - Todo
+  // - DailyQuest
+  // - DailyQuestProgress
+  // - FriendInvite
+  // - Item
+  // - InventoryItem
+  // - Reward
+  // - RewardItem
+  // - RewardClaimLog
+
+enum TodoType{
+  WORK
+  HOBBY
+  HEALTH
+  SELP_MANAGEMENT
+  STUDY
+}
+
+enum FriendState{
+  INVITED
+  FRIEND
+  IGNORE
+  BLOCK
+}
+
+enum DailyQuestStatus{
+  PENDING
+  COMPLETED
+  MISSED
+}
+
+// 유저 정보, 스탯, 경험치 등
+model User{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(10)
+  email String @unique
+  password String 
+  str Int @default(1) // 근력, 업무 관련
+  dex Int @default(1) // 민첩, 취미 관련
+  sta Int @default(1) // 체력, 건강 관련
+  cha Int @default(1) // 매력, 자기관리 관련
+  intel Int @default(1) // 지능, 배움과 사고 관련
+  exp Int @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  todos Todo[]
+  dailyQuests DailyQuest[] 
+  friendMes Friend[] @relation("friendUser")
+  friendFriends Friend[] @relation("friendFriend")
+  items Item[]
+  RewardClaimLogs RewardClaimLog[]
+
+  @@map("users")
+}
+
+// 단순 할 일 목록
+model Todo{
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(100)
+  content String @db.VarChar(500)
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+  todoType TodoType @map("todo_type")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("todos")
+}
+
+// 일일 할 일 목록
+model DailyQuest{
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(100)
+  content String @db.VarChar(500)
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+  todoType TodoType @map("todo_type")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  dailyQuestPregresses DailyQuestProgress[]
+
+  @@map("daily_quests")
+}
+
+// 일일 할 일 목록 진행 상황
+model DailyQuestProgress{
+  id Int @id @default(autoincrement())
+
+  dailyQuestId Int @map("daily_quest_id")
+  dailyQuest DailyQuest @relation(fields: [dailyQuestId], references: [id])
+
+  status DailyQuestStatus
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("daily_quest_progresses")
+}
+
+// 친구 목록 및 초대 여부
+model Friend{
+  id Int @id @default(autoincrement())
+
+  userId Int @map("user_id")
+  user User @relation("friendUser", fields: [userId], references: [id])
+
+  friendId Int @map("friend_id")
+  friend User @relation("friendFriend", fields: [friendId], references: [id])
+
+  state FriendState 
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("friends")
+}
+
+// 리워드 목록
+model Reward{
+  id Int @id @default(autoincrement())
+  name String
+  content String
+  memo String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  RewardClaimLogs RewardClaimLog[]
+
+  @@map("rewards")
+}
+
+// 기본 보상 아이템 목록
+model RewardItem{
+  id Int @id @default(autoincrement())
+  name String
+  content String
+  memo String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  items Item[]
+  RewardClaimLogs RewardClaimLog[]
+
+  @@map("reward_items")
+}
+
+// 보상 제공 로그
+model RewardClaimLog{
+  id Int @id @default(autoincrement())
+
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+
+  rewardId Int @map("reward_id")
+  reward Reward @relation(fields: [rewardId], references: [id])
+
+  itemId Int @map("item_id")
+  item RewardItem @relation(fields: [itemId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+}
+
+// 유저 소지중인 아이템 목록
+model Item{
+  id Int @id @default(autoincrement())
+
+  userId Int @map("user_id")
+  user User @relation(fields: [userId], references: [id])
+
+  itemId Int @map("item_id")
+  item RewardItem @relation(fields: [itemId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("items")
+}
+
+
+// 
+// model InventoryItem{
+//   id Int @id @default(autoincrement())
+//   name String
+//   content String
+//   memo String
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+//   deletedAt DateTime? @map("deleted_at")
+
+//   items Item[]
+
+//   @@map("inventory_items")
+// }
