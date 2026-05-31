@@ -1,8 +1,11 @@
-import Image from "next/image";
+import { getSession } from "@/lib/session";
+import Todo from "./(components)/Todo";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSession();
   return (
     <>
+      <Todo session={JSON.stringify(session)} />
     </>
   );
 }
