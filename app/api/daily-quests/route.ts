@@ -76,7 +76,9 @@ export async function GET(req : NextRequest){
                             createdAt : {
                                 gte : today
                             }
-                        }
+                        }, orderBy : {
+                            createdAt : "desc"
+                        }, take : 1
                     }
                 },
                 where : {
