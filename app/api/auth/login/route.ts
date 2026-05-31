@@ -23,6 +23,8 @@ export async function POST(req : NextRequest){
         return NextResponse.json(response, {status : 400});
     }
 
+    console.log("POST /api/auth/login request : ", JSON.stringify(requestData));
+
     if(!requestData.email){
         response.message = "이메일을 입력하세요";
         return NextResponse.json(response, {status : 400});
