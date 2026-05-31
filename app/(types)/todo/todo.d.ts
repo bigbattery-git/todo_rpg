@@ -1,3 +1,5 @@
+import { TodoStatus, TodoType } from "@/src/generated/enums"
+
 export interface GETTodoResponse {
     success : boolean,
     message : string | null,
