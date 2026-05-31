@@ -19,6 +19,7 @@ interface POSTCheckTodoRequest{
 
 export async function POST(req : NextRequest){
     let requestData : POSTCheckTodoRequest;
+    const cannotCancelTodoMessage : string = "경험치가 최소라서 업무 완료 취소를 할 수 없습니다.";
 
     const response : POSTCheckTodoResponse = {
         success : false,
@@ -63,7 +64,27 @@ export async function POST(req : NextRequest){
 
         const sessionId : number = session.user.id;
 
+
+
         const result = await prisma.$transaction(async (prisma) => {
+
+            const explog = await prisma.userExpLog.findMany({
+                select : {
+                    exp : true
+                }, where : {
+                    userId : sessionId
+                }
+            });
+
+            let expSum : number = 0;
+
+            explog.forEach((a) => {
+                expSum += a.exp;
+            })
+
+            if(expSum % 1000 === 0 && currentTodoData.todoStatus === "COMPLETED"){
+                throw new Error(cannotCancelTodoMessage);
+            }
 
             const checkingTodoData = await prisma.todo.update({
                 data : {
@@ -80,19 +101,7 @@ export async function POST(req : NextRequest){
                 }
             })
 
-            const explog = await prisma.userExpLog.findMany({
-                select : {
-                    exp : true
-                }, where : {
-                    userId : sessionId
-                }
-            });
-
-            let expSum : number = 0;
-
-            explog.forEach((a) => {
-                expSum += a.exp;
-            })
+            expSum += (checkingTodoData.todoStatus === "COMPLETED" ? 100 : -100);
 
             return {
                 checkingTodoData,
@@ -112,6 +121,12 @@ export async function POST(req : NextRequest){
         return NextResponse.json(response, {status : 200});
     } catch (e) {
         console.error(e);
+
+        if(e instanceof Error && e.message === cannotCancelTodoMessage){
+            response.message = cannotCancelTodoMessage;
+            return NextResponse.json(response, {status : 400});
+        }
+        
         response.message = SERVERERROR;
         return NextResponse.json(response, {status : 500});
     }
