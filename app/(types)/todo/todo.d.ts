@@ -22,3 +22,9 @@ export interface POSTTodoResponse {
     message : string | null,
     data ?: TodoData
 }
+
+export interface PostTodoRequest {
+    title : string,
+    content : string,
+    todoType : TodoType,
+}
