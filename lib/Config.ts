@@ -10,3 +10,28 @@ export const getNextLevelUpExp = (currentExt : number) : number => {
 
     return (currentLevel * 1000) + 1000;
 }
+
+export const getPaginationNum = (currentPage : number, totalPage : number) : number[] => {
+    if(currentPage < 1){
+        currentPage = 1;
+    } else if (currentPage > totalPage ){
+        currentPage = totalPage;
+    }
+
+    const paginateList : number[] = [currentPage -2 , currentPage -1, currentPage, currentPage +1, currentPage +2];
+
+    const result : number[] = [];
+
+    for( let i = 0; i < paginateList.length; i++ ){
+        
+        if(paginateList[i] > totalPage){
+            break;
+        }
+        
+        if(paginateList[i] > 0){
+            result.push(paginateList[i]);
+        }
+    }
+
+    return result;
+}

@@ -59,7 +59,9 @@ export default function Todo(props : {session : string}){
 
             await setTodoData(data.data);
         } catch (e) {
-            alert(e);
+            if (axios.isAxiosError(e)){
+                alert(e.response?.data.message)
+            }
         }
     }
 

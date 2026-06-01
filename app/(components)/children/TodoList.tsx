@@ -1,5 +1,6 @@
 import { GETTodoResponse, PostTodoRequest, TodoData } from "@/app/(types)/todo/todo";
 import { GETUsersResponse } from "@/app/(types)/user/user";
+import { getPaginationNum } from "@/lib/Config";
 import { TodoType } from "@/src/generated/enums";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useRef, useState } from "react";
@@ -36,6 +37,13 @@ export default function TodoList(props : {getTodoData : Function, todoData : GET
         }
     }
 
+    async function getTodoList(page : number){
+        await setCurrentPage(page);
+        props.getTodoData(page)
+        
+        console.log("성공, page : ", page);
+    }
+
     return (
         <>
             {
@@ -49,6 +57,16 @@ export default function TodoList(props : {getTodoData : Function, todoData : GET
                     }) : props.todoData?.message) 
                 : "" 
             }
+            <div className="flex">
+                {
+                    props.todoData ? 
+                        (props.todoData.success && props.todoData.data?.lastPage ? getPaginationNum(currentPage, props.todoData.data?.lastPage).map((a, i) => {
+                            return (<button key={i} className={`border w-10 h-10 mx-2 ${a === currentPage ? "border-amber-500" : ""}`} onClick={() => {getTodoList(a)}}>{a}</button>)
+                        }) : "")
+                    : ""
+                }
+            </div>
+
             <input
             value={title}
             onChange={(e) => {setTitle(e.target.value)}}
