@@ -1,11 +1,16 @@
 "use client"
 
 import { GETItemsResponse } from "@/app/(types)/item/item";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { getPaginationNum } from "@/lib/Config";
+import { useState } from "react";
 
-export default function Inventory(props : {itemData : GETItemsResponse | null | undefined}){
+export default function Inventory(props : {itemData : GETItemsResponse | null | undefined, getItems : Function}){
     const [currentPage, setCurrentPage] = useState<number>(1);
+
+    async function getItemLists(page : number){
+        await props.getItems(page);
+        await setCurrentPage(page);
+    }
 
     return (
         <>
@@ -20,6 +25,15 @@ export default function Inventory(props : {itemData : GETItemsResponse | null | 
                 }) : props.itemData?.message)
                 : ""
             }
+            <div className="flex">
+                {
+                    props.itemData ? 
+                        (props.itemData.success && props.itemData.datas?.lastPage ? getPaginationNum(currentPage, props.itemData.datas?.lastPage).map((a, i) => {
+                            return (<button key={i} className={`border w-10 h-10 mx-2 ${a === currentPage ? "border-amber-500" : ""}`} onClick={() => {getItemLists(a)}}>{a}</button>)
+                        }) : "")
+                    : ""
+                }
+            </div>
         </>
     )
 }
