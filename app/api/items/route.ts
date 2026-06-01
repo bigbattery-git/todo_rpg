@@ -44,6 +44,9 @@ export async function GET(req : NextRequest){
                     userId : userId,
                     deletedAt : null
                 },
+                orderBy : {
+                    id : "desc"
+                },
                 take : itemSize,
                 skip : (page - 1) * itemSize
             });
