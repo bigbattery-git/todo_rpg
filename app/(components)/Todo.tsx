@@ -10,6 +10,7 @@ import { GETUsersResponse } from "../(types)/user/user";
 import axios from "axios";
 import { GETTodoResponse, PostTodoRequest, TodoData } from "../(types)/todo/todo";
 import { GETItemsResponse, POSTItemsResponse } from "../(types)/item/item";
+import { GETDailyQuestResponse, POSTDailyQuestRequest } from "../(types)/daily-quest/daily-quest";
 
 export default function Todo(props : {session : string}){
 
@@ -17,6 +18,7 @@ export default function Todo(props : {session : string}){
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [todoData, setTodoData] = useState<GETTodoResponse | null>();
     const [itemData, setItemData] = useState<GETItemsResponse | null>();
+    const [dailyquestsData , setDailyQuestsData] = useState<GETDailyQuestResponse | null>();
 
     const route = useRouter();
     useEffect(()=>{
@@ -35,6 +37,7 @@ export default function Todo(props : {session : string}){
         getUserData();
         getTodoData(1);
         getItems(1);
+        getDailyQuestList(1);
 
         setIsLoading(false);
     }, [])
@@ -143,10 +146,57 @@ export default function Todo(props : {session : string}){
     //         setDailyQuests(e.response.data)
     //     })
     // }
-    function getDailyQuestList(){
-        
+    async function getDailyQuestList(page : number){
+        try{
+            const data = await axios.get('/api/daily-quests', {params : {page : page}});
+            const dailyQuestData : GETDailyQuestResponse = data.data;
+
+            setDailyQuestsData(dailyQuestData);
+        }catch (e) {
+            if(axios.isAxiosError(e)){
+                alert(`getDailyQuestList : ${e.response?.data.message}`);
+            }
+        }
     }
 
+    async function addDailyQuestList(req : POSTDailyQuestRequest ,page : number){
+        try {
+            const data = await axios.post('/api/daily-quests', req);
+            await getDailyQuestList(page);
+        } catch (e) {
+            if(axios.isAxiosError(e)){
+                alert(e.response?.data.message);
+            }
+        }
+    }
+
+    async function chkDailyQuest(id : number, page : number){
+        try{
+            let isCompleted : boolean = false;
+
+            dailyquestsData?.data?.dailyQuestData.forEach(a => {
+                if(a.id === id){
+                    if(a.dailyQuestPregresses[0] && a.dailyQuestPregresses[0].status === "COMPLETED"){
+                        isCompleted = true;
+                    }
+                }
+            });
+
+            if(isCompleted){
+                alert("이미 완료한 업무는 취소할 수 없습니다.");
+                return
+            }
+
+            await axios.post('/api/daily-quests/check-daily-quests', {id : id});
+
+            await setItems();
+            await getDailyQuestList(page);
+        } catch (e) {
+            if(axios.isAxiosError(e)){
+                alert(e.response?.data.message);
+            }
+        }
+    }
 
     if(isLoading){
         return <>로딩중</>
@@ -161,7 +211,7 @@ export default function Todo(props : {session : string}){
             <TodoList getTodoData={getTodoData} todoData={todoData} onCheckTodoList={onCheckTodoList} addTodoList={addTodoList}/>
             <br />
             일일 퀘스트 리스트임
-            <DailyQuest/>
+            <DailyQuest dailyQuestData={dailyquestsData} getDailyQuestList={getDailyQuestList} addDailyQuestList={addDailyQuestList} chkDailyQuest={chkDailyQuest}/>
             <br />
             인벤토리
             <Inventory itemData={itemData} getItems={getItems}/>
