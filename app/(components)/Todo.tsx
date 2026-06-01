@@ -65,12 +65,14 @@ export default function Todo(props : {session : string}){
         }
     }
 
-    async function addTodoList(inputData : PostTodoRequest, page : 1 | number = 1){
+    async function addTodoList(inputData : PostTodoRequest, page : number){
         try {
             await axios.post('/api/todos', inputData);
             await getTodoData(page);
         } catch (e) {
-            alert(e);
+            if(axios.isAxiosError(e)){
+                alert(e.response?.data.message);
+            }
         }
     }
 
@@ -131,6 +133,20 @@ export default function Todo(props : {session : string}){
         }
     }
 
+    // 일일 퀘스트
+    // function getTodoListData(){
+    //     axios.get('/api/daily-quests', {params : {
+    //         page : currentPage
+    //     }}).then(data => {
+    //         setDailyQuests(data.data)
+    //     }).catch(e => {
+    //         setDailyQuests(e.response.data)
+    //     })
+    // }
+    function getDailyQuestList(){
+        
+    }
+
 
     if(isLoading){
         return <>로딩중</>
@@ -148,7 +164,7 @@ export default function Todo(props : {session : string}){
             <DailyQuest/>
             <br />
             인벤토리
-            <Inventory itemData={itemData}/>
+            <Inventory itemData={itemData} getItems={getItems}/>
         </>
     )
 }

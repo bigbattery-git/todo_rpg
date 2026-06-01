@@ -24,7 +24,7 @@ export default function TodoList(props : {getTodoData : Function, todoData : GET
         }
 
         try {
-            props.addTodoList(reqData);
+            props.addTodoList(reqData, currentPage);
 
             setContent("");
             setTitle("");
@@ -40,8 +40,6 @@ export default function TodoList(props : {getTodoData : Function, todoData : GET
     async function getTodoList(page : number){
         await setCurrentPage(page);
         props.getTodoData(page)
-        
-        console.log("성공, page : ", page);
     }
 
     return (
@@ -80,7 +78,7 @@ export default function TodoList(props : {getTodoData : Function, todoData : GET
             className="border"
             />
 
-            <button onClick={setTodoList}>제출하거라</button>
+            <button onClick={() => setTodoList()}>제출하거라</button>
             <hr />
         </>
     )
