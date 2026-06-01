@@ -9,13 +9,14 @@ import Inventory from "./children/Inventory";
 import { GETUsersResponse } from "../(types)/user/user";
 import axios from "axios";
 import { GETTodoResponse, PostTodoRequest, TodoData } from "../(types)/todo/todo";
-import { GETItemsResponse } from "../(types)/item/item";
+import { GETItemsResponse, POSTItemsResponse } from "../(types)/item/item";
 
 export default function Todo(props : {session : string}){
 
     const [userData , setUserData] = useState<GETUsersResponse | null | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [todoData, setTodoData] = useState<GETTodoResponse | null>();
+    const [itemData, setItemData] = useState<GETItemsResponse | null>();
 
     const route = useRouter();
     useEffect(()=>{
@@ -31,17 +32,23 @@ export default function Todo(props : {session : string}){
             route.push('/login');
         }
 
+        getUserData();
         getTodoData(1);
-
-        axios.get('/api/users')
-        .then((data) => {
-            setUserData(data.data);
-        }).catch((e) => {
-            setUserData(e.response.data);
-        })
+        getItems(1);
 
         setIsLoading(false);
     }, [])
+
+    async function getUserData(){
+        try{
+            const data = await axios.get('/api/users');
+            setUserData(data.data);
+        }catch(e){
+            if(axios.isAxiosError(e)){
+                alert(e.response?.data.message)
+            }
+        }
+    }
 
     // TodoList
     async function getTodoData(page : number){
@@ -71,7 +78,7 @@ export default function Todo(props : {session : string}){
                 id : id
             });
             if(data != null){
-                const currentUserData : GETUsersResponse = {...userData}
+                const currentUserData : GETUsersResponse  = {...userData}
 
                 if(currentUserData.data?.totalExp){
                     currentUserData.data.totalExp = data.data.data.currentExp;
@@ -79,14 +86,49 @@ export default function Todo(props : {session : string}){
 
                 await setUserData(currentUserData);
                 await getTodoData(page);
+
+                if(userData?.data?.totalExp && userData.data.totalExp % 1000 === 0){
+                    setItems();
+                }
             }
         }catch (e) {
-            alert(e);
+            if(axios.isAxiosError(e)){
+                alert(e.response?.data.message);
+            }
         }
     } 
 
     // 인벤토리
-    
+    async function getItems(page : number){
+        try {
+            const items = await axios.get('/api/items', {params : {page : page}});
+            setItemData(items.data);
+        } catch (e) {
+            if (axios.isAxiosError(e)){
+                alert(e.response?.data.message)
+            }
+        }
+    }
+
+    async function setItems(){
+        try {
+            const items = await axios.post('/api/items');
+
+            const postItemData : POSTItemsResponse = items.data;
+
+            const currentItemData = {...itemData}
+            if(currentItemData.datas && postItemData.data){
+                currentItemData.datas.items.unshift(postItemData.data);
+            }
+
+            setItemData(currentItemData);
+        } catch(e) {
+            if(axios.isAxiosError(e)){
+                alert(e.response?.data.message);
+            }
+        }
+    }
+
 
     if(isLoading){
         return <>로딩중</>
@@ -104,7 +146,7 @@ export default function Todo(props : {session : string}){
             <DailyQuest/>
             <br />
             인벤토리
-            <Inventory />
+            <Inventory itemData={itemData}/>
         </>
     )
 }
