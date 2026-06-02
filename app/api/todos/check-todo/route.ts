@@ -1,7 +1,7 @@
 import { BADJSONDATA, NEEDLOGIN, SERVERERROR } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
-import { Todo, User } from "@/src/generated/browser";
+import { Todo } from "@/src/generated/browser";
 import { NextRequest, NextResponse } from "next/server";
 
 interface POSTCheckTodoResponse{

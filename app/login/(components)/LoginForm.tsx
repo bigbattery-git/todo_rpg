@@ -8,7 +8,6 @@ export default function LoginForm(props : {session : string}){
     const route = useRouter();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [warn, setWarn] = useState<string>("");
     useEffect(() => {
         function init(){
             const session = JSON.parse(props.session);
@@ -28,7 +27,7 @@ export default function LoginForm(props : {session : string}){
             headers : {
                 "Content-Type" : "application/json"
             }
-        }).then((data) => {
+        }).then(() => {
             route.push('/');
         }).catch((e) => {
             alert(e.response.data.message);

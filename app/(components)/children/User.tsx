@@ -2,8 +2,6 @@
 
 import { GETUsersResponse } from "@/app/(types)/user/user"
 import { getNextLevelUpExp } from "@/lib/Config";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
 export default function User(props : {userData : GETUsersResponse | null | undefined, isLoading : boolean}){
     if(props.isLoading){

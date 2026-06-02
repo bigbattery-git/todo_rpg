@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma"
 
 async function main(){
-    const user = await prisma.user.upsert({
+    await prisma.user.upsert({
         where : {
             email : "test@test.com"
         },
@@ -13,7 +13,7 @@ async function main(){
         }
     })
 
-    const reward = await prisma.reward.upsert({
+    await prisma.reward.upsert({
         where : {
             id : 1
         }, 
@@ -25,7 +25,7 @@ async function main(){
         }
     })
 
-    const rewardItem = await prisma.rewardItem.upsert({
+    await prisma.rewardItem.upsert({
         where : {
             id : 1
         }, update : {

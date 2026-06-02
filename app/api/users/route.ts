@@ -42,7 +42,7 @@ export async function GET(){
         }
 
         return NextResponse.json(response, {status : 200});
-    }catch (e) {
+    }catch {
         response.message = SERVERERROR;
         return NextResponse.json(response, {status : 500});
     }

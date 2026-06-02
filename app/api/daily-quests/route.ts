@@ -2,8 +2,6 @@ import { GETDailyQuestResponse, POSTDailyQuestRequest, POSTDailyQuestResponse } 
 import { BADJSONDATA, SERVERERROR, TODOTYPE } from "@/lib/Config";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/session";
-import { DailyQuest } from "@/src/generated/browser";
-import { DailyQuestStatus, TodoStatus, TodoType} from "@/src/generated/enums";
 import { NextRequest, NextResponse } from "next/server";
 
 

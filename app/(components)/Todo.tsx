@@ -8,7 +8,7 @@ import DailyQuest from "./children/DailyQuest";
 import Inventory from "./children/Inventory";
 import { GETUsersResponse } from "../(types)/user/user";
 import axios from "axios";
-import { GETTodoResponse, PostTodoRequest, TodoData } from "../(types)/todo/todo";
+import { GETTodoResponse, PostTodoRequest } from "../(types)/todo/todo";
 import { GETItemsResponse, POSTItemsResponse } from "../(types)/item/item";
 import { GETDailyQuestResponse, POSTDailyQuestRequest } from "../(types)/daily-quest/daily-quest";
 
@@ -165,7 +165,7 @@ export default function Todo(props : {session : string}){
 
     async function addDailyQuestList(req : POSTDailyQuestRequest ,page : number){
         try {
-            const data = await axios.post('/api/daily-quests', req);
+            await axios.post('/api/daily-quests', req);
             await getDailyQuestList(page);
         } catch (e) {
             if(axios.isAxiosError(e)){

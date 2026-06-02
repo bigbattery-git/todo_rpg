@@ -1,9 +1,8 @@
-import { GETTodoResponse, PostTodoRequest, TodoData } from "@/app/(types)/todo/todo";
-import { GETUsersResponse } from "@/app/(types)/user/user";
+import { GETTodoResponse, PostTodoRequest } from "@/app/(types)/todo/todo";
 import { getPaginationNum } from "@/lib/Config";
 import { TodoType } from "@/src/generated/enums";
-import axios, { AxiosResponse } from "axios";
-import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 interface PropsData {
     getTodoData : (page : number) => void;
@@ -20,7 +19,7 @@ export default function TodoList(props : PropsData){
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
-    const [todoType, setTodoType] = useState<TodoType>("HEALTH");
+    const [todoType] = useState<TodoType>("HEALTH");
 
     async function setTodoList(){
         const reqData : PostTodoRequest = {

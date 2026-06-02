@@ -18,7 +18,7 @@ export async function POST(req : NextRequest){
 
     try {
         requestData = await req.json();
-    } catch (e) {
+    } catch {
         response.message = BADJSONDATA;
         return NextResponse.json(response, {status : 400});
     }

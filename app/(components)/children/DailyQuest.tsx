@@ -17,7 +17,7 @@ export default function DailyQuest(props : PropsData){
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
-    const [todoType, setTodoType] = useState<TodoType>("HEALTH");
+    const [todoType] = useState<TodoType>("HEALTH");
 
     async function setDailyQuestList(){
         const reqData : POSTDailyQuestRequest = {
