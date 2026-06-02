@@ -28,6 +28,6 @@ export interface POSTItemsResponse {
 }
 
 
-export interface POSTItemsRequest{
-    // TODO :  나중에 아이템 여러 개 추가되면 그 때 사용
-}
+// export interface POSTItemsRequest{
+//     // TODO :  나중에 아이템 여러 개 추가되면 그 때 사용
+// }
