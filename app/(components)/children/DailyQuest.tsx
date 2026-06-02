@@ -6,7 +6,14 @@ import { TodoType } from "@/src/generated/enums";
 import axios from "axios";
 import { useState } from "react";
 
-export default function DailyQuest(props : {dailyQuestData : GETDailyQuestResponse | null | undefined, getDailyQuestList : Function, addDailyQuestList : Function, chkDailyQuest : Function}){
+interface PropsData{
+    dailyQuestData : GETDailyQuestResponse | null | undefined;
+    getDailyQuestList : (paage : number) => void;
+    addDailyQuestList : (reqData : POSTDailyQuestRequest, page : number) => void;
+    chkDailyQuest : (id : number, page :number) => void; 
+}
+
+export default function DailyQuest(props : PropsData){
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");

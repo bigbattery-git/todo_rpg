@@ -5,7 +5,18 @@ import { TodoType } from "@/src/generated/enums";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useRef, useState } from "react";
 
-export default function TodoList(props : {getTodoData : Function, todoData : GETTodoResponse | null |undefined, onCheckTodoList : Function, addTodoList : Function}){
+interface PropsData {
+    getTodoData : (page : number) => void;
+    todoData : GETTodoResponse | null |undefined;
+    onCheckTodoList : (id : number, page :number) => void;
+    addTodoList : (reqData : {
+        title: string;
+        content: string;
+        todoType: TodoType;
+    }, page : number) => void;
+}
+
+export default function TodoList(props : PropsData){
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");

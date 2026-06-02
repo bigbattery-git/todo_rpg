@@ -4,7 +4,12 @@ import { GETItemsResponse } from "@/app/(types)/item/item";
 import { getPaginationNum } from "@/lib/Config";
 import { useState } from "react";
 
-export default function Inventory(props : {itemData : GETItemsResponse | null | undefined, getItems : Function}){
+interface PropsData {
+    itemData : GETItemsResponse | null | undefined;
+    getItems : (page : number) => void;
+}
+
+export default function Inventory(props : PropsData){
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     async function getItemLists(page : number){
