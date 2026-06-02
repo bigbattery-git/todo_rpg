@@ -23,7 +23,7 @@ export const sessionOptions : SessionOptions = {
     cookieOptions : {
         httpOnly : true,
         secure : process.env.NODE_ENV === "production",
-        sameSite : "lex",
+        sameSite : "lax",
         path : "/"
     }
 }
