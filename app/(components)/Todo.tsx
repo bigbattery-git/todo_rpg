@@ -89,7 +89,13 @@ export default function Todo(props : {session : string}){
                 id : id
             });
             if(data != null){
-                const currentUserData : GETUsersResponse  = {...userData}
+                let currentUserData : GETUsersResponse | null = null;
+
+                if(!userData){
+                    return;
+                }
+
+                currentUserData = {...userData}
 
                 if(currentUserData.data?.totalExp){
                     currentUserData.data.totalExp = data.data.data.currentExp;
@@ -127,8 +133,13 @@ export default function Todo(props : {session : string}){
 
             const postItemData : POSTItemsResponse = items.data;
 
-            const currentItemData = {...itemData}
-            if(currentItemData.datas && postItemData.data){
+            let currentItemData : GETItemsResponse | null = null;
+
+            if(items.data && itemData){
+                currentItemData = {...itemData};
+            }
+
+            if(currentItemData?.datas?.items&&postItemData.data){
                 currentItemData.datas.items.unshift(postItemData.data);
             }
 
