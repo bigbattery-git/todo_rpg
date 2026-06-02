@@ -22,24 +22,28 @@ export default function Todo(props : {session : string}){
 
     const route = useRouter();
     useEffect(()=>{
-        setIsLoading(true);
+        async function init(){
+            setIsLoading(true);
 
-        const session : {
-            user : {
-                id : number
-            }, isLoggedin : boolean
-        } = JSON.parse(props.session);
+            const session : {
+                user : {
+                    id : number
+                }, isLoggedin : boolean
+            } = JSON.parse(props.session);
 
-        if(!session || !session.isLoggedin || !session?.user?.id){
-            route.push('/login');
+            if(!session || !session.isLoggedin || !session?.user?.id){
+                route.push('/login');
+            }
+
+            getUserData();
+            getTodoData(1);
+            getItems(1);
+            getDailyQuestList(1);
+
+            setIsLoading(false);
         }
 
-        getUserData();
-        getTodoData(1);
-        getItems(1);
-        getDailyQuestList(1);
-
-        setIsLoading(false);
+        init();
     }, [])
 
     async function getUserData(){
